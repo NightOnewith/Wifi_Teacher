@@ -1,13 +1,15 @@
 package com.zijin.wifi_teacher.activity;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zijin.wifi_teacher.R;
+import com.zijin.wifi_teacher.fragment.MessageFragment;
+import com.zijin.wifi_teacher.fragment.PersonFragment;
 import com.zijin.wifi_teacher.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout ly_user,ly_message,ly_person;
     private TextView tv_user,tv_message,tv_person;
     private TextView tv_message_num;
+    FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +25,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         bindView();
-        ly_user.performClick();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        setSelected();
+        tv_user.setSelected(true);
         UserFragment fg1 = new UserFragment();
-        transaction.add(R.id.fragment_container,fg1);
-        transaction.commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fg1).commit();
     }
 
     private void bindView() {
@@ -59,15 +62,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ly_tab_menu_user:
                 setSelected();
                 tv_user.setSelected(true);
+
+                UserFragment fg1 = new UserFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fg1).commit();
                 break;
             case R.id.ly_tab_menu_message:
                 setSelected();
                 tv_message.setSelected(true);
                 tv_message_num.setVisibility(View.INVISIBLE);
+
+                MessageFragment fg2 = new MessageFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fg2).commit();
                 break;
             case R.id.ly_tab_menu_person:
                 setSelected();
                 tv_person.setSelected(true);
+
+                PersonFragment fg3 = new PersonFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fg3).commit();
                 break;
         }
     }

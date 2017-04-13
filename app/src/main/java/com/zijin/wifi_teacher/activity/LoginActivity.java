@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             final String wifissid = "一键点名" + "_" + ssid;
                             WifiApAdmin wifiAp = new WifiApAdmin(mContext);
-                            wifiAp.startWifiAp(wifissid, "wifiService123");
+                            wifiAp.startWifiAp(wifissid, "wifiTeacher");
 
                             //延时2秒执行
                             new Handler().postDelayed((new Runnable() {
